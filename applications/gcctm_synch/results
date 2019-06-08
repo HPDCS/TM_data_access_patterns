@@ -1,0 +1,43 @@
+ml_wt
+./app 4 1000000000
+*************************
+ Thread concurrency test 
+*************************
+The initial value of shared_int was 0 
+The final value of shared_int is 3 (expected: 4)
+The final value of dummy_sum is 9998970257.839312
+Threads: 4	The elapsed time is 24.623593 seconds
+
+gl_wt
+./app 4 1000000000
+*************************
+ Thread concurrency test 
+*************************
+The initial value of shared_int was 0 
+The final value of shared_int is 3 (expected: 4)
+The final value of dummy_sum is 9998960425.974556
+Threads: 4	The elapsed time is 24.095895 seconds
+
+
+
+ml_wt
+./app 4 1000000000 1
+*************************
+ Thread concurrency test 
+*************************
+The elapsed time is 24.100867 seconds
+The elapsed time is 24.079584 seconds
+The elapsed time is 24.101451 seconds
+The elapsed time is 24.067569 seconds
+The elapsed time is 24.119350 seconds
+The elapsed time is 24.684198 seconds
+The elapsed time is 24.076401 seconds
+The elapsed time is 24.091300 seconds
+The elapsed time is 24.093326 seconds
+The elapsed time is 24.046078 seconds
+The elapsed time is 24.115436 seconds
+The elapsed time is 24.092597 seconds
+The elapsed time is 24.082546 seconds
+The elapsed time is 24.081544 seconds
+The elapsed time is 24.042242 seconds
+

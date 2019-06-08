@@ -1,0 +1,37 @@
+*************************
+ Thread concurrency test, reads before writes, ml_wt 
+*************************
+The elapsed time is 32.312990 seconds
+The elapsed time is 32.149374 seconds
+The elapsed time is 32.098721 seconds
+The elapsed time is 32.064866 seconds
+The elapsed time is 32.083423 seconds
+The elapsed time is 32.103387 seconds
+The elapsed time is 32.078255 seconds
+The elapsed time is 32.054292 seconds
+The elapsed time is 32.034670 seconds
+The elapsed time is 32.136822 seconds
+The elapsed time is 32.138927 seconds
+The elapsed time is 32.203385 seconds
+The elapsed time is 32.208797 seconds
+The elapsed time is 32.079474 seconds
+The elapsed time is 32.083160 seconds
+*************************
+ Thread concurrency test, writes before reads, ml_wt 
+*************************
+The elapsed time is 32.101277 seconds
+The elapsed time is 32.113251 seconds
+The elapsed time is 32.112000 seconds
+The elapsed time is 32.098951 seconds
+The elapsed time is 32.127680 seconds
+The elapsed time is 32.102299 seconds
+The elapsed time is 32.095097 seconds
+The elapsed time is 32.101133 seconds
+The elapsed time is 32.051796 seconds
+The elapsed time is 32.105321 seconds
+The elapsed time is 32.086329 seconds
+The elapsed time is 32.053003 seconds
+The elapsed time is 32.078631 seconds
+The elapsed time is 32.105485 seconds
+The elapsed time is 32.066834 seconds
+
