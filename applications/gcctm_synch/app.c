@@ -46,7 +46,7 @@ void run (void* argPtr) {
 
 	long my_variables[10] = {0};
 	int steps;
-	
+
 	for(steps = 0; steps < data.num_steps; steps++){
 	//start transaction
 	__transaction_atomic {	//remark: export ITM_DEFAULT_METHOD=ml_wt
@@ -83,7 +83,7 @@ void run (void* argPtr) {
 			my_variables[2] = vals[2];
 			spend_some_time();
 		}
-		else{
+		else if (data.rw == 2){
 			spend_some_time();
 			my_variables[1] = vals[1];
 			spend_some_time();
@@ -92,6 +92,28 @@ void run (void* argPtr) {
 			vals[3] = my_variables[3];
 			spend_some_time();
 			vals[4] = my_variables[4];
+			spend_some_time();
+		}
+		else if (data.rw == 3){
+			spend_some_time();
+			my_variables[1] = vals[1];
+			spend_some_time();
+			my_variables[2] = vals[2];
+			spend_some_time();
+			my_variables[3] = vals[3];
+			spend_some_time();
+			vals[4] = my_variables[4];
+			spend_some_time();
+		}
+		else{
+			spend_some_time();
+			vals[4] = my_variables[4];
+			spend_some_time();
+			my_variables[1] = vals[1];
+			spend_some_time();
+			my_variables[2] = vals[2];
+			spend_some_time();
+			my_variables[3] = vals[3];
 			spend_some_time();
 		}
 		
@@ -126,7 +148,7 @@ int main(int argc, char **argv)
 		setenv("ITM_DEFAULT_METHOD", "gl_wt", 1);
 	else
 		setenv("ITM_DEFAULT_METHOD", "ml_wt", 1);
-	int rw = 1;
+	int rw = 3;	//1
 
 	struct data data= {
 		.rw = rw,
@@ -159,7 +181,7 @@ int main(int argc, char **argv)
 	}
 
 	//again but with writes before reads
-	data.rw = 2;
+	data.rw = 4;	//2
 
 	printf("*************************");
 	printf("\n Thread concurrency test, writes before reads, %s", getenv("ITM_DEFAULT_METHOD"));
