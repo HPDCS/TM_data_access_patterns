@@ -35,10 +35,19 @@ void spend_some_time(){
 	}
 }
 
+struct data{
+	int rw;
+	int num_steps;
+};
+
 void run (void* argPtr) {
 
-	long my_variables[10] = {0};
+	struct data data = *((struct data *) argPtr);
 
+	long my_variables[10] = {0};
+	int steps;
+	
+	for(steps = 0; steps < data.num_steps; steps++){
 	//start transaction
 	__transaction_atomic {	//remark: export ITM_DEFAULT_METHOD=ml_wt
 
@@ -63,7 +72,7 @@ void run (void* argPtr) {
 		vals[2]++;
 
 		spend_some_time();*/
-		if ( (long) argPtr == 1){
+		if ( data.rw == 1){
 			spend_some_time();
 			vals[3] = my_variables[3];
 			spend_some_time();
@@ -95,6 +104,7 @@ void run (void* argPtr) {
 		sum += my_variables[i];
 	}
 	//printf("%ld\n", sum);
+	}
 }
 
 
@@ -102,20 +112,26 @@ int main(int argc, char **argv)
 {
     	TIMER_T start, stop;
 
-	if(argc<=2) {
+	if(argc<=3) {
 	        printf("\nYou did not feed me the correct number of arguments.");
-		printf("\nUsage: program_name number_of_threads dummy_time global_lock_flag\nBye bye :( ...\n");
+		printf("\nUsage: program_name number_of_threads dummy_time num_steps global_lock_flag\nBye bye :( ...\n");
 	        exit(1);
 	     }  
 	int numThread = atoi(argv[1]);
 	dummy_cycles = atoi(argv[2]);
+	int num_steps = atoi(argv[3]);
 	//printf("\nThe initial value of shared_int was %i ",shared_int);
-	int global_lock = atoi(argv[3]);
+	int global_lock = atoi(argv[4]);
 	if (global_lock == 1)
 		setenv("ITM_DEFAULT_METHOD", "gl_wt", 1);
 	else
 		setenv("ITM_DEFAULT_METHOD", "ml_wt", 1);
-	long rw = 1;
+	int rw = 1;
+
+	struct data data= {
+		.rw = rw,
+		.num_steps = num_steps,
+	};
 
 	printf("*************************");
 	printf("\n Thread concurrency test, reads before writes, %s", getenv("ITM_DEFAULT_METHOD"));
@@ -132,7 +148,7 @@ int main(int argc, char **argv)
 
 		TIMER_READ(start);
 		//run all threads
-		thread_start(run, (void*)rw);
+		thread_start(run, (void*)&data);
 		TIMER_READ(stop);
 
 		thread_shutdown();
@@ -143,7 +159,7 @@ int main(int argc, char **argv)
 	}
 
 	//again but with writes before reads
-	rw = 2;
+	data.rw = 2;
 
 	printf("*************************");
 	printf("\n Thread concurrency test, writes before reads, %s", getenv("ITM_DEFAULT_METHOD"));
@@ -159,7 +175,7 @@ int main(int argc, char **argv)
 
 		TIMER_READ(start);
 		//run all threads
-		thread_start(run, (void*)rw);
+		thread_start(run, (void*)&data);
 		TIMER_READ(stop);
 
 		thread_shutdown();
