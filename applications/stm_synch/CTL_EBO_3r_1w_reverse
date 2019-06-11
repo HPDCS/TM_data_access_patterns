@@ -1,0 +1,68 @@
+./app 4 20000 10000 100 1
+*************************
+ Thread concurrency test, reads before writes, reverse order
+*************************
+	Commits: 40000	Aborts: 338
+The elapsed time is 6.113082 seconds
+	Commits: 80000	Aborts: 583
+The elapsed time is 5.509897 seconds
+	Commits: 120000	Aborts: 950
+The elapsed time is 5.479462 seconds
+	Commits: 160000	Aborts: 1283
+The elapsed time is 5.501036 seconds
+	Commits: 200000	Aborts: 1424
+The elapsed time is 5.503557 seconds
+	Commits: 240000	Aborts: 1552
+The elapsed time is 5.490768 seconds
+	Commits: 280000	Aborts: 1938
+The elapsed time is 5.493834 seconds
+	Commits: 320000	Aborts: 2010
+The elapsed time is 5.486734 seconds
+	Commits: 360000	Aborts: 2158
+The elapsed time is 5.541399 seconds
+	Commits: 400000	Aborts: 2640
+The elapsed time is 5.488217 seconds
+	Commits: 440000	Aborts: 2773
+The elapsed time is 5.518637 seconds
+	Commits: 480000	Aborts: 2959
+The elapsed time is 5.483718 seconds
+	Commits: 520000	Aborts: 3049
+The elapsed time is 5.527139 seconds
+	Commits: 560000	Aborts: 3126
+The elapsed time is 5.505621 seconds
+	Commits: 600000	Aborts: 3588
+The elapsed time is 5.490344 seconds
+*************************
+ Thread concurrency test, writes before reads, reverse order
+*************************
+	Commits: 640000	Aborts: 4082
+The elapsed time is 5.482673 seconds
+	Commits: 680000	Aborts: 4166
+The elapsed time is 5.476026 seconds
+	Commits: 720000	Aborts: 4259
+The elapsed time is 5.495018 seconds
+	Commits: 760000	Aborts: 4395
+The elapsed time is 5.488634 seconds
+	Commits: 800000	Aborts: 4756
+The elapsed time is 5.489830 seconds
+	Commits: 840000	Aborts: 5195
+The elapsed time is 5.480286 seconds
+	Commits: 880000	Aborts: 5648
+The elapsed time is 5.543272 seconds
+	Commits: 920000	Aborts: 5779
+The elapsed time is 5.516606 seconds
+	Commits: 960000	Aborts: 5900
+The elapsed time is 5.492723 seconds
+	Commits: 1000000	Aborts: 6036
+The elapsed time is 5.722967 seconds
+	Commits: 1040000	Aborts: 6422
+The elapsed time is 5.658127 seconds
+	Commits: 1080000	Aborts: 6520
+The elapsed time is 5.547610 seconds
+	Commits: 1120000	Aborts: 7038
+The elapsed time is 5.513467 seconds
+	Commits: 1160000	Aborts: 7519
+The elapsed time is 5.510612 seconds
+	Commits: 1200000	Aborts: 7613
+The elapsed time is 5.520853 seconds
+
