@@ -241,6 +241,7 @@ void run (void* argPtr) {
 			sum += my_variables[i];
 		}
 		spend_some_time();
+		/*spend_some_time();
 		spend_some_time();
 		spend_some_time();
 		spend_some_time();
@@ -250,8 +251,7 @@ void run (void* argPtr) {
 		spend_some_time();
 		spend_some_time();
 		spend_some_time();
-		spend_some_time();
-		spend_some_time();
+		spend_some_time();*/
 	}
 
     TM_THREAD_EXIT();
@@ -429,7 +429,8 @@ void run2 (void* argPtr) {
 			cell += current_block;
 			current_block-=blocks;
 
-			TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			//TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			my_variables[cell] = TM_SHARED_READ(vals[cell]);
 
 			spend_some_time();
 
@@ -439,7 +440,8 @@ void run2 (void* argPtr) {
 			cell += current_block;
 			current_block-=blocks;
 
-			TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			//TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			my_variables[cell] = TM_SHARED_READ(vals[cell]);
 
 			spend_some_time();
 			
@@ -449,7 +451,8 @@ void run2 (void* argPtr) {
 			cell += current_block;
 			current_block-=blocks;
 
-			my_variables[cell] = TM_SHARED_READ(vals[cell]);
+			//my_variables[cell] = TM_SHARED_READ(vals[cell]);
+			TM_SHARED_WRITE(vals[cell], my_variables[cell]);
 
 			spend_some_time();
 
@@ -459,7 +462,8 @@ void run2 (void* argPtr) {
 			cell += current_block;
 			current_block-=blocks;
 
-			my_variables[cell] = TM_SHARED_READ(vals[cell]);
+			//my_variables[cell] = TM_SHARED_READ(vals[cell]);
+			TM_SHARED_WRITE(vals[cell], my_variables[cell]);
 
 			spend_some_time();
 		}
@@ -652,6 +656,7 @@ void run2 (void* argPtr) {
 			sum += my_variables[i];
 		}
 		spend_some_time();
+		/*spend_some_time();
 		spend_some_time();
 		spend_some_time();
 		spend_some_time();
@@ -661,12 +666,256 @@ void run2 (void* argPtr) {
 		spend_some_time();
 		spend_some_time();
 		spend_some_time();
-		spend_some_time();
-		spend_some_time();
+		spend_some_time();*/
 	}
 
     TM_THREAD_EXIT();
 }
+
+
+void run3 (void* argPtr) {
+
+	struct data data = *((struct data *) argPtr);
+
+	long* my_variables = calloc(blocks*4, sizeof(long));
+	int steps;
+	int thread_number = thread_getId();
+	int cell = 0;
+	TM_THREAD_ENTER();
+	for(steps = 0; steps < data.num_steps; steps++){
+		//start transaction
+		TM_BEGIN();
+		int current_block = 0;
+		
+			spend_some_time();
+			
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block+=blocks;
+
+			if(random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block+=blocks;
+
+			if (random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+			
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block+=blocks;
+
+			if (random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block+=blocks;
+
+			if (random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+		
+		TM_END(); //end transaction
+
+		int i;
+		sum = 0;
+		for (i = 0; i < blocks*4; i++){
+			sum += my_variables[i];
+		}
+		spend_some_time();
+		/*spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();*/
+	}
+
+    TM_THREAD_EXIT();
+}
+
+void run4 (void* argPtr) {
+
+	struct data data = *((struct data *) argPtr);
+
+	long* my_variables = calloc(blocks*4, sizeof(long));
+	int steps;
+	int thread_number = thread_getId();
+	int cell = 0;
+	int current_block = 0;
+	TM_THREAD_ENTER();
+	for(steps = 0; steps < data.num_steps; steps++){
+		//start transaction
+		TM_BEGIN();
+		if (thread_number >= total_threads/2)
+			current_block = 0;
+		else
+			current_block = 3*blocks;
+		if (thread_number >= total_threads/2){
+			spend_some_time();
+			
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block+=blocks;
+
+			if(random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block+=blocks;
+
+			if (random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+			
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block+=blocks;
+
+			if (random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block+=blocks;
+
+			if (random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+		}
+		else{
+			spend_some_time();
+			
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block-=blocks;
+
+			if(random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block-=blocks;
+
+			if (random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+			
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block-=blocks;
+
+			if (random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+
+			cell = (int)(random_number(&pseed)*blocks);
+			if (cell > blocks-1)
+				cell = blocks-1;
+			cell += current_block;
+			current_block-=blocks;
+
+			if (random_number(&pseed) > 0.5)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+		}
+		TM_END(); //end transaction
+
+		int i;
+		sum = 0;
+		for (i = 0; i < blocks*4; i++){
+			sum += my_variables[i];
+		}
+		spend_some_time();
+		/*spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();
+		spend_some_time();*/
+	}
+
+    TM_THREAD_EXIT();
+}
+
 
 
 
@@ -688,7 +937,7 @@ int main(int argc, char **argv)
 	int num_blocks = atoi(argv[4]);
 	blocks = num_blocks / 4;
 	vals = calloc(num_blocks, sizeof(long));
-	int rw = 1;	//3
+	int rw = 2;	//3
 	int reverse = atoi(argv[5]);
 
 	struct data data= {
@@ -753,11 +1002,11 @@ int main(int argc, char **argv)
 			printf("\nThe elapsed time is %f seconds\n", TIMER_DIFF_SECONDS(start, stop));
 		}
 	}
-	else{
+	else if (reverse == 1){
 		printf("*************************");
 		printf("\n Thread concurrency test, reads before writes, reverse order");
 		printf("\n*************************\n");
-		for (counter = 0; counter < 15; counter++){
+		for (counter = 0; counter < 4; counter++){
 			pseed=time(NULL);
 
 			//initialize spinlock
@@ -771,9 +1020,10 @@ int main(int argc, char **argv)
 			thread_start(run2, (void*)&data);
 			TIMER_READ(stop);
 
-			TM_SHUTDOWN();
+			
 
 			thread_shutdown();
+			TM_SHUTDOWN();
 
 			//printf("\nThe final value of shared_int is %i (expected: %i)", shared_int, numThread);
 			//printf("\nThe final value of dummy_sum is %f", dummy_sum);
@@ -787,7 +1037,7 @@ int main(int argc, char **argv)
 		printf("\n Thread concurrency test, writes before reads, reverse order");
 		printf("\n*************************\n");
 
-		for (counter = 0; counter < 15; counter++){
+		for (counter = 0; counter < 4; counter++){
 			pseed=time(NULL);
 			
 			TM_STARTUP(numThread);
@@ -795,12 +1045,67 @@ int main(int argc, char **argv)
 
 			TIMER_READ(start);
 			//run all threads
-			thread_start(run2, (void*)&data);
+			thread_start(run, (void*)&data);
 			TIMER_READ(stop);
 
-			TM_SHUTDOWN();
+			
 
 			thread_shutdown();
+			TM_SHUTDOWN();
+
+			//printf("\nThe final value of shared_int is %i (expected: %i)", shared_int, numThread);
+			//printf("\nThe final value of dummy_sum is %f", dummy_sum);
+			printf("\nThe elapsed time is %f seconds\n", TIMER_DIFF_SECONDS(start, stop));
+		}
+	}
+	else{
+		printf("*************************");
+		printf("\n Thread concurrency test, reads before writes, random order");
+		printf("\n*************************\n");
+		for (counter = 0; counter < 40; counter++){
+			pseed=time(NULL);
+
+			//initialize spinlock
+
+			TM_STARTUP(numThread);
+			
+			thread_startup(numThread);
+
+			TIMER_READ(start);
+			//run all threads
+			thread_start(run3, (void*)&data);
+			TIMER_READ(stop);
+
+			
+
+			thread_shutdown();
+			TM_SHUTDOWN();
+
+			//printf("\nThe final value of shared_int is %i (expected: %i)", shared_int, numThread);
+			//printf("\nThe final value of dummy_sum is %f", dummy_sum);
+			printf("\nThe elapsed time is %f seconds\n", TIMER_DIFF_SECONDS(start, stop));
+		}
+		printf("*************************");
+		printf("\n Thread concurrency test, reads before writes, random order, thread pools");
+		printf("\n*************************\n");
+		for (counter = 0; counter < 40; counter++){
+			pseed=time(NULL);
+
+			//initialize spinlock
+
+			TM_STARTUP(numThread);
+			
+			thread_startup(numThread);
+
+			TIMER_READ(start);
+			//run all threads
+			thread_start(run4, (void*)&data);
+			TIMER_READ(stop);
+
+			
+
+			thread_shutdown();
+			TM_SHUTDOWN();
 
 			//printf("\nThe final value of shared_int is %i (expected: %i)", shared_int, numThread);
 			//printf("\nThe final value of dummy_sum is %f", dummy_sum);
