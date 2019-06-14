@@ -1,4 +1,4 @@
-#STM Benchmark
+# STM Benchmark
 
 This benchmark application uses TinySTM as TM library.
 
