@@ -10,12 +10,12 @@ The usage for the benchmark is
 
 `./app [number_of_threads] [dummy_time] [number_of_wait_cycles] [number_of_transaction_per_thread] [shared_memory_size] [number_of_test_repetitions]`
 
--**number_of_threads** is the number of thread the benchmark will spawn
--**dummy_time** is the time spent doing nothing (transaction padding time)
--**number_of_wait_cycles** is how many times a transaction has to wait dummyi_time
--**number_of_transactions_per_thread** is how many transactions each thread executes
--**shared_memory_size** indicates the size in double words (8 bytes) of the shared memory block accessed by the transactions. It should be a multiple of 4, since each instruction of a transaction accesses randomly an memory area in a sub-block that is 1/4 the original block.
--**number_of_test_repetition** indicates the times the test is run (in order to have good statistical data on transactions time and aborts number)
+- **number_of_threads** is the number of thread the benchmark will spawn
+- **dummy_time** is the time spent doing nothing (transaction padding time)
+- **number_of_wait_cycles** is how many times a transaction has to wait dummyi_time
+- **number_of_transactions_per_thread** is how many transactions each thread executes
+- **shared_memory_size** indicates the size in double words (8 bytes) of the shared memory block accessed by the transactions. It should be a multiple of 4, since each instruction of a transaction accesses randomly an memory area in a sub-block that is 1/4 the original block.
+- **number_of_test_repetition** indicates the times the test is run (in order to have good statistical data on transactions time and aborts number)
 
 
 To better visualize the result of the benchmark it is possible to copy and paste the output of the benchmark in a text file, save it and run `python3 results.py [file_name]`
