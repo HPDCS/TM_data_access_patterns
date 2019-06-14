@@ -1,0 +1,168 @@
+./app 16 20000 2000 4 2
+*************************
+ Thread concurrency test, reads before writes, random order
+*************************
+	Commits: 32000	Aborts: 15044
+The elapsed time is 4.480282 seconds
+	Commits: 64000	Aborts: 28015
+The elapsed time is 4.425330 seconds
+	Commits: 96000	Aborts: 42372
+The elapsed time is 4.466289 seconds
+	Commits: 128000	Aborts: 56109
+The elapsed time is 4.427105 seconds
+	Commits: 160000	Aborts: 67238
+The elapsed time is 4.409202 seconds
+	Commits: 192000	Aborts: 78245
+The elapsed time is 4.409539 seconds
+	Commits: 224000	Aborts: 92522
+The elapsed time is 4.452926 seconds
+	Commits: 256000	Aborts: 105991
+The elapsed time is 4.423857 seconds
+	Commits: 288000	Aborts: 121156
+The elapsed time is 4.463063 seconds
+	Commits: 320000	Aborts: 137119
+The elapsed time is 4.467362 seconds
+	Commits: 352000	Aborts: 150217
+The elapsed time is 4.423800 seconds
+	Commits: 384000	Aborts: 160810
+The elapsed time is 4.405332 seconds
+	Commits: 416000	Aborts: 171639
+The elapsed time is 4.409979 seconds
+	Commits: 448000	Aborts: 182489
+The elapsed time is 4.408208 seconds
+	Commits: 480000	Aborts: 193960
+The elapsed time is 4.415227 seconds
+	Commits: 512000	Aborts: 204356
+The elapsed time is 4.408279 seconds
+	Commits: 544000	Aborts: 215622
+The elapsed time is 4.408515 seconds
+	Commits: 576000	Aborts: 227266
+The elapsed time is 4.437590 seconds
+	Commits: 608000	Aborts: 238544
+The elapsed time is 4.425553 seconds
+	Commits: 640000	Aborts: 250928
+The elapsed time is 4.427120 seconds
+	Commits: 672000	Aborts: 261804
+The elapsed time is 4.411961 seconds
+	Commits: 704000	Aborts: 272416
+The elapsed time is 4.407159 seconds
+	Commits: 736000	Aborts: 285887
+The elapsed time is 4.415137 seconds
+	Commits: 768000	Aborts: 296352
+The elapsed time is 4.408245 seconds
+	Commits: 800000	Aborts: 309852
+The elapsed time is 4.418992 seconds
+	Commits: 832000	Aborts: 320356
+The elapsed time is 4.409898 seconds
+	Commits: 864000	Aborts: 330785
+The elapsed time is 4.408928 seconds
+	Commits: 896000	Aborts: 341875
+The elapsed time is 4.423379 seconds
+	Commits: 928000	Aborts: 352459
+The elapsed time is 4.409258 seconds
+	Commits: 960000	Aborts: 364165
+The elapsed time is 4.426212 seconds
+	Commits: 992000	Aborts: 374814
+The elapsed time is 4.409466 seconds
+	Commits: 1024000	Aborts: 385656
+The elapsed time is 4.408367 seconds
+	Commits: 1056000	Aborts: 402513
+The elapsed time is 4.418412 seconds
+	Commits: 1088000	Aborts: 413442
+The elapsed time is 4.408811 seconds
+	Commits: 1120000	Aborts: 424432
+The elapsed time is 4.423487 seconds
+	Commits: 1152000	Aborts: 436401
+The elapsed time is 4.425026 seconds
+	Commits: 1184000	Aborts: 449278
+The elapsed time is 4.415518 seconds
+	Commits: 1216000	Aborts: 460734
+The elapsed time is 4.412597 seconds
+	Commits: 1248000	Aborts: 474501
+The elapsed time is 4.415112 seconds
+	Commits: 1280000	Aborts: 484999
+The elapsed time is 4.409409 seconds
+*************************
+ Thread concurrency test, reads before writes, random order, thread pools
+*************************
+	Commits: 1312000	Aborts: 1102094
+The elapsed time is 5.770994 seconds
+	Commits: 1344000	Aborts: 1664785
+The elapsed time is 5.669856 seconds
+	Commits: 1376000	Aborts: 2487560
+The elapsed time is 6.313612 seconds
+	Commits: 1408000	Aborts: 3366858
+The elapsed time is 6.395242 seconds
+	Commits: 1440000	Aborts: 4057874
+The elapsed time is 5.943478 seconds
+	Commits: 1472000	Aborts: 4885068
+The elapsed time is 6.260499 seconds
+	Commits: 1504000	Aborts: 5671775
+The elapsed time is 6.125433 seconds
+	Commits: 1536000	Aborts: 6531905
+The elapsed time is 6.325953 seconds
+	Commits: 1568000	Aborts: 7180347
+The elapsed time is 5.859710 seconds
+	Commits: 1600000	Aborts: 7927625
+The elapsed time is 6.064405 seconds
+	Commits: 1632000	Aborts: 8702051
+The elapsed time is 6.108828 seconds
+	Commits: 1664000	Aborts: 9313085
+The elapsed time is 5.806588 seconds
+	Commits: 1696000	Aborts: 9987003
+The elapsed time is 5.897542 seconds
+	Commits: 1728000	Aborts: 10615263
+The elapsed time is 5.803231 seconds
+	Commits: 1760000	Aborts: 11285906
+The elapsed time is 5.896316 seconds
+	Commits: 1792000	Aborts: 12173957
+The elapsed time is 6.360481 seconds
+	Commits: 1824000	Aborts: 12942601
+The elapsed time is 6.126179 seconds
+	Commits: 1856000	Aborts: 13421560
+The elapsed time is 5.470885 seconds
+	Commits: 1888000	Aborts: 14091528
+The elapsed time is 5.903127 seconds
+	Commits: 1920000	Aborts: 14746517
+The elapsed time is 5.852864 seconds
+	Commits: 1952000	Aborts: 15577420
+The elapsed time is 6.232620 seconds
+	Commits: 1984000	Aborts: 16061903
+The elapsed time is 5.489352 seconds
+	Commits: 2016000	Aborts: 16826133
+The elapsed time is 6.091107 seconds
+	Commits: 2048000	Aborts: 17619602
+The elapsed time is 6.162321 seconds
+	Commits: 2080000	Aborts: 18449961
+The elapsed time is 6.233533 seconds
+	Commits: 2112000	Aborts: 19330261
+The elapsed time is 6.352814 seconds
+	Commits: 2144000	Aborts: 20158493
+The elapsed time is 6.249433 seconds
+	Commits: 2176000	Aborts: 20900585
+The elapsed time is 6.075604 seconds
+	Commits: 2208000	Aborts: 21583315
+The elapsed time is 5.934236 seconds
+	Commits: 2240000	Aborts: 22306012
+The elapsed time is 6.011770 seconds
+	Commits: 2272000	Aborts: 23188658
+The elapsed time is 6.403729 seconds
+	Commits: 2304000	Aborts: 23860721
+The elapsed time is 5.901116 seconds
+	Commits: 2336000	Aborts: 24485353
+The elapsed time is 5.815161 seconds
+	Commits: 2368000	Aborts: 25222289
+The elapsed time is 6.057450 seconds
+	Commits: 2400000	Aborts: 25998150
+The elapsed time is 6.120222 seconds
+	Commits: 2432000	Aborts: 26806256
+The elapsed time is 6.194301 seconds
+	Commits: 2464000	Aborts: 27554435
+The elapsed time is 6.097758 seconds
+	Commits: 2496000	Aborts: 28271906
+The elapsed time is 5.995152 seconds
+	Commits: 2528000	Aborts: 28903176
+The elapsed time is 5.809806 seconds
+	Commits: 2560000	Aborts: 29576229
+The elapsed time is 5.927172 seconds
+
