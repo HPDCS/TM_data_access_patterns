@@ -58,7 +58,7 @@ for line in input_file:
 
 
 plot_list = [mode_1_plot, mode_2_plot]
-plt.boxplot(plot_list)
+plt.boxplot(plot_list, showmeans=True)
 plt.title("TinySTM transactions time with respect to read-writes patterns")
 plt.xlabel("Pattern type")
 plt.ylabel("Time (seconds)")
@@ -68,8 +68,9 @@ plt.show()
 
 
 abort_plot_list = [aborts_1_plot, aborts_2_plot]
-plt.boxplot(abort_plot_list)
+plt.boxplot(abort_plot_list, showmeans=True)
 plt.title("TinySTM transaction abort number")
 plt.xticks([1,2],["all the same", "thread pools"])
 plt.ylabel("# aborts")
+plt.yticks(np.arange(0,100000, step = 1000))
 plt.show()
