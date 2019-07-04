@@ -19,7 +19,7 @@ long sum = 0;
 int blocks = 0;
 int total_threads = 0;
 
-int num_ops = 0;
+int num_ops = 0; //represents the number of operations per transaction. It is also used for dividing the blocks.
 
 // random number generator between 0 and 1
 double random_number(unsigned *pseed){
@@ -51,7 +51,7 @@ void run3 (void* argPtr) {
 
 	struct data data = *((struct data *) argPtr);
 
-	long* my_variables = calloc(blocks*num_ops, sizeof(long)); //TODO: we are sure of num_ops? maybe we want some user input
+	long* my_variables = calloc(blocks*num_ops, sizeof(long));
 	int steps;
 	int thread_number = thread_getId();
 	int cell = 0;
@@ -86,7 +86,7 @@ void run3 (void* argPtr) {
 
 		int i;
 		sum = 0;
-		for (i = 0; i < blocks*4; i++){
+		for (i = 0; i < blocks*num_ops; i++){
 			sum += my_variables[i];
 		}
 
@@ -104,7 +104,7 @@ void run4 (void* argPtr) {
 
 	struct data data = *((struct data *) argPtr);
 
-	long* my_variables = calloc(blocks*4, sizeof(long));
+	long* my_variables = calloc(blocks*num_ops, sizeof(long));
 	int steps;
 	int thread_number = thread_getId();
 	int cell = 0;
@@ -120,13 +120,13 @@ void run4 (void* argPtr) {
 		if (thread_number >= total_threads/2)
 			current_block = 0;
 		else
-			current_block = 3*blocks;
+			current_block = (num_ops-1)*blocks;
 
 		int i_op;
 
 		if (thread_number >= total_threads/2){		//first thread pool
 
-			for(i_op = 0; i_op < 4; i_op++){
+			for(i_op = 0; i_op < num_ops; i_op++){
 
 				spend_some_time();
 			
@@ -148,7 +148,7 @@ void run4 (void* argPtr) {
 		}
 		else{										//second thread pool
 
-			for(i_op = 0; i_op < 4; i_op++){
+			for(i_op = 0; i_op < num_ops; i_op++){
 
 				spend_some_time();
 			
@@ -173,7 +173,7 @@ void run4 (void* argPtr) {
 
 		int i;
 		sum = 0;
-		for (i = 0; i < blocks*4; i++){
+		for (i = 0; i < blocks*num_ops; i++){
 			sum += my_variables[i];
 		}
 		int c;
@@ -252,7 +252,7 @@ int main(int argc, char **argv)
 		TM_SHUTDOWN();
 
 		printf("\nThe elapsed time is %f seconds\n", TIMER_DIFF_SECONDS(start, stop));
-	}/*
+	}
 	printf("*************************");
 	printf("\n Thread concurrency test, random reads/writes, thread pools");
 	printf("\n*************************\n");
@@ -273,7 +273,7 @@ int main(int argc, char **argv)
 		TM_SHUTDOWN();
 
 		printf("\nThe elapsed time is %f seconds\n", TIMER_DIFF_SECONDS(start, stop));
-	}*/
+	}
 
     return 0;
 }
