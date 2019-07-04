@@ -11,15 +11,16 @@
 
 #define NORM		0x7fffffff
 
-unsigned pseed;
+unsigned pseed; //used by the RNG
 double dummy_sum;
 int dummy_cycles=0;
-long* vals;
+long* vals; //holds the values for the array
 long sum = 0;
-int blocks = 0;
+int blocks = 0; //represents how many times we divided the array
 int total_threads = 0;
 
-int num_ops = 0; //represents the number of operations per transaction. It is also used for dividing the blocks.
+int num_ops = 0; //represents the number of operations per transaction. It is also used for dividing the blocks
+double probability = 0; //used for checking the random number which will decide a TM_SHARED_READ or TM_SHARED_WRITE
 
 // random number generator between 0 and 1
 double random_number(unsigned *pseed){
@@ -73,7 +74,7 @@ void run3 (void* argPtr) {
 			cell += current_block;
 			current_block+=blocks;
 
-			if(random_number(&pseed) > 0.5)
+			if(random_number(&pseed) > probability)
 				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
 			else
 				my_variables[cell] = TM_SHARED_READ(vals[cell]);
@@ -136,7 +137,7 @@ void run4 (void* argPtr) {
 				cell += current_block;
 				current_block+=blocks;
 
-				if(random_number(&pseed) > 0.5)
+				if(random_number(&pseed) > probability)
 					TM_SHARED_WRITE(vals[cell], my_variables[cell]);
 				else
 					my_variables[cell] = TM_SHARED_READ(vals[cell]);
@@ -158,7 +159,7 @@ void run4 (void* argPtr) {
 				cell += current_block;
 				current_block-=blocks;
 
-				if(random_number(&pseed) > 0.5)
+				if(random_number(&pseed) > probability)
 					TM_SHARED_WRITE(vals[cell], my_variables[cell]);
 				else
 					my_variables[cell] = TM_SHARED_READ(vals[cell]);
@@ -192,9 +193,9 @@ int main(int argc, char **argv)
 {
     TIMER_T start, stop;
 
-	if(argc<8) {
+	if(argc<9) {
 	    printf("\nYou did not feed me the correct number of arguments.");
-		printf("\nUsage: %s [number_of_threads] [dummy_time] [num_waits] [num_steps] [num_blocks] [test_repetitions] [num_ops]\nBye bye :( ...\n", argv[0]);
+		printf("\nUsage: %s [number_of_threads] [dummy_time] [num_waits] [num_steps] [num_blocks] [test_repetitions] [num_ops] [probability]\nBye bye :( ...\n", argv[0]);
 	    exit(1);
 	}  
 
@@ -224,6 +225,8 @@ int main(int argc, char **argv)
 	}
 
 	blocks = num_blocks / num_ops;
+
+	probability = atof(argv[8]);
 
 	struct data data= {
 		.num_steps = num_steps,
