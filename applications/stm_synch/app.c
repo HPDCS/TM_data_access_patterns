@@ -58,7 +58,11 @@ void run3 (void* argPtr) {
 		//start transaction
 		TM_BEGIN();
 		int current_block = 0;
-		
+
+		int i_op;
+
+		for(i_op = 0; i_op < 4; i_op++){
+
 			spend_some_time();
 			
 			cell = (int)(random_number(&pseed)*blocks);
@@ -74,44 +78,7 @@ void run3 (void* argPtr) {
 
 			spend_some_time();
 
-			cell = (int)(random_number(&pseed)*blocks);
-			if (cell > blocks-1)
-				cell = blocks-1;
-			cell += current_block;
-			current_block+=blocks;
-
-			if (random_number(&pseed) > 0.5)
-				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
-			else
-				my_variables[cell] = TM_SHARED_READ(vals[cell]);
-
-			spend_some_time();
-			
-			cell = (int)(random_number(&pseed)*blocks);
-			if (cell > blocks-1)
-				cell = blocks-1;
-			cell += current_block;
-			current_block+=blocks;
-
-			if (random_number(&pseed) > 0.5)
-				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
-			else
-				my_variables[cell] = TM_SHARED_READ(vals[cell]);
-
-			spend_some_time();
-
-			cell = (int)(random_number(&pseed)*blocks);
-			if (cell > blocks-1)
-				cell = blocks-1;
-			cell += current_block;
-			current_block+=blocks;
-
-			if (random_number(&pseed) > 0.5)
-				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
-			else
-				my_variables[cell] = TM_SHARED_READ(vals[cell]);
-
-			spend_some_time();
+		}
 		
 		TM_END(); //end transaction
 
@@ -153,116 +120,51 @@ void run4 (void* argPtr) {
 		else
 			current_block = 3*blocks;
 
+		int i_op;
 
 		if (thread_number >= total_threads/2){		//first thread pool
-			spend_some_time();
+
+			for(i_op = 0; i_op < 4; i_op++){
+
+				spend_some_time();
 			
-			cell = (int)(random_number(&pseed)*blocks);
-			if (cell > blocks-1)
-				cell = blocks-1;
-			cell += current_block;
-			current_block+=blocks;
+				cell = (int)(random_number(&pseed)*blocks);
+				if (cell > blocks-1)
+					cell = blocks-1;
+				cell += current_block;
+				current_block+=blocks;
 
-			if(random_number(&pseed) > 0.5)
-				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
-			else
-				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+				if(random_number(&pseed) > 0.5)
+					TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+				else
+					my_variables[cell] = TM_SHARED_READ(vals[cell]);
 
-			spend_some_time();
+				spend_some_time();
 
-			cell = (int)(random_number(&pseed)*blocks);
-			if (cell > blocks-1)
-				cell = blocks-1;
-			cell += current_block;
-			current_block+=blocks;
+			}
 
-			if (random_number(&pseed) > 0.5)
-				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
-			else
-				my_variables[cell] = TM_SHARED_READ(vals[cell]);
-
-			spend_some_time();
-			
-			cell = (int)(random_number(&pseed)*blocks);
-			if (cell > blocks-1)
-				cell = blocks-1;
-			cell += current_block;
-			current_block+=blocks;
-
-			if (random_number(&pseed) > 0.5)
-				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
-			else
-				my_variables[cell] = TM_SHARED_READ(vals[cell]);
-
-			spend_some_time();
-
-			cell = (int)(random_number(&pseed)*blocks);
-			if (cell > blocks-1)
-				cell = blocks-1;
-			cell += current_block;
-			current_block+=blocks;
-
-			if (random_number(&pseed) > 0.5)
-				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
-			else
-				my_variables[cell] = TM_SHARED_READ(vals[cell]);
-
-			spend_some_time();
 		}
 		else{										//second thread pool
-			spend_some_time();
+
+			for(i_op = 0; i_op < 4; i_op++){
+
+				spend_some_time();
 			
-			cell = (int)(random_number(&pseed)*blocks);
-			if (cell > blocks-1)
-				cell = blocks-1;
-			cell += current_block;
-			current_block-=blocks;
+				cell = (int)(random_number(&pseed)*blocks);
+				if (cell > blocks-1)
+					cell = blocks-1;
+				cell += current_block;
+				current_block-=blocks;
 
-			if(random_number(&pseed) > 0.5)
-				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
-			else
-				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+				if(random_number(&pseed) > 0.5)
+					TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+				else
+					my_variables[cell] = TM_SHARED_READ(vals[cell]);
 
-			spend_some_time();
+				spend_some_time();
 
-			cell = (int)(random_number(&pseed)*blocks);
-			if (cell > blocks-1)
-				cell = blocks-1;
-			cell += current_block;
-			current_block-=blocks;
+			}
 
-			if (random_number(&pseed) > 0.5)
-				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
-			else
-				my_variables[cell] = TM_SHARED_READ(vals[cell]);
-
-			spend_some_time();
-			
-			cell = (int)(random_number(&pseed)*blocks);
-			if (cell > blocks-1)
-				cell = blocks-1;
-			cell += current_block;
-			current_block-=blocks;
-
-			if (random_number(&pseed) > 0.5)
-				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
-			else
-				my_variables[cell] = TM_SHARED_READ(vals[cell]);
-
-			spend_some_time();
-
-			cell = (int)(random_number(&pseed)*blocks);
-			if (cell > blocks-1)
-				cell = blocks-1;
-			cell += current_block;
-			current_block-=blocks;
-
-			if (random_number(&pseed) > 0.5)
-				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
-			else
-				my_variables[cell] = TM_SHARED_READ(vals[cell]);
-
-			spend_some_time();
 		}
 		
 		TM_END(); //end transaction
