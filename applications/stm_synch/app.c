@@ -19,6 +19,8 @@ long sum = 0;
 int blocks = 0;
 int total_threads = 0;
 
+int num_ops = 0;
+
 // random number generator between 0 and 1
 double random_number(unsigned *pseed){
    	unsigned   temp;
@@ -49,7 +51,7 @@ void run3 (void* argPtr) {
 
 	struct data data = *((struct data *) argPtr);
 
-	long* my_variables = calloc(blocks*4, sizeof(long));
+	long* my_variables = calloc(blocks*num_ops, sizeof(long)); //TODO: we are sure of num_ops? maybe we want some user input
 	int steps;
 	int thread_number = thread_getId();
 	int cell = 0;
@@ -61,7 +63,7 @@ void run3 (void* argPtr) {
 
 		int i_op;
 
-		for(i_op = 0; i_op < 4; i_op++){
+		for(i_op = 0; i_op < num_ops; i_op++){
 
 			spend_some_time();
 			
@@ -190,9 +192,9 @@ int main(int argc, char **argv)
 {
     TIMER_T start, stop;
 
-	if(argc<=5) {
+	if(argc<8) {
 	    printf("\nYou did not feed me the correct number of arguments.");
-		printf("\nUsage: %s [number_of_threads] [dummy_time] [num_waits] [num_steps] [num_blocks] [test_repetitions]\nBye bye :( ...\n", argv[0]);
+		printf("\nUsage: %s [number_of_threads] [dummy_time] [num_waits] [num_steps] [num_blocks] [test_repetitions] [num_ops]\nBye bye :( ...\n", argv[0]);
 	    exit(1);
 	}  
 
@@ -205,11 +207,23 @@ int main(int argc, char **argv)
 	int num_steps = atoi(argv[4]);
 	
 	int num_blocks = atoi(argv[5]);
-	blocks = num_blocks / 4;
+	
 	vals = calloc(num_blocks, sizeof(long));
 
 	int repetitions = atoi(argv[6]);
 
+	num_ops = atoi(argv[7]);
+
+	if (num_ops == 0){
+		printf("Error: num_ops can't be zero.\n");
+		exit(-1);
+	}
+	else if(num_blocks % num_ops != 0){
+		printf("Error: num_blocks has to be a multiple of num_ops\n");
+		exit(-1);
+	}
+
+	blocks = num_blocks / num_ops;
 
 	struct data data= {
 		.num_steps = num_steps,
@@ -238,7 +252,7 @@ int main(int argc, char **argv)
 		TM_SHUTDOWN();
 
 		printf("\nThe elapsed time is %f seconds\n", TIMER_DIFF_SECONDS(start, stop));
-	}
+	}/*
 	printf("*************************");
 	printf("\n Thread concurrency test, random reads/writes, thread pools");
 	printf("\n*************************\n");
@@ -259,7 +273,7 @@ int main(int argc, char **argv)
 		TM_SHUTDOWN();
 
 		printf("\nThe elapsed time is %f seconds\n", TIMER_DIFF_SECONDS(start, stop));
-	}
+	}*/
 
     return 0;
 }
