@@ -33,6 +33,24 @@ double random_number(unsigned *pseed){
    	return  temp1;
 }
 
+/*
+Returns a random number between 0 and limit inclusive.
+Credits https://stackoverflow.com/questions/2999075/generate-a-random-number-within-range/2999130#2999130
+ */
+
+int rand_lim(int limit) {
+
+    int divisor = RAND_MAX/(limit+1);
+    int retval;
+
+    do { 
+        retval = rand() / divisor;
+    } while (retval > limit);
+
+    return retval;
+
+}
+
 //a function for spending some time
 void spend_some_time(){
 	int cycles=0;
@@ -186,7 +204,56 @@ void run4 (void* argPtr) {
     TM_THREAD_EXIT();
 }
 
+void run5 (void* argPtr){
 
+	struct data data = *((struct data *) argPtr);
+
+	long* my_variables = calloc(blocks*num_ops, sizeof(long));
+	int steps;
+	int thread_number = thread_getId();
+	int cell = 0;
+	TM_THREAD_ENTER();
+
+	for(steps = 0; steps < data.num_steps; steps++){
+		//start transaction
+		TM_BEGIN();
+		int current_block = 0;
+
+		int i_op;
+
+		for(i_op = 0; i_op < num_ops; i_op++){
+
+			spend_some_time();
+			
+			cell = rand_lim((blocks*num_ops)-1);
+
+			if(random_number(&pseed) > probability)
+				TM_SHARED_WRITE(vals[cell], my_variables[cell]);
+			else
+				my_variables[cell] = TM_SHARED_READ(vals[cell]);
+
+			spend_some_time();
+
+		}
+		
+		TM_END(); //end transaction
+
+		int i;
+		sum = 0;
+		for (i = 0; i < blocks*num_ops; i++){
+			sum += my_variables[i];
+		}
+
+		int c;
+		for (c = 0; c < data.num_waits; c++){
+			spend_some_time();
+		}
+		
+	}
+
+    TM_THREAD_EXIT();
+
+}
 
 
 int main(int argc, char **argv)
@@ -269,6 +336,27 @@ int main(int argc, char **argv)
 		TIMER_READ(start);
 		//run all threads
 		thread_start(run4, (void*)&data);
+		TIMER_READ(stop);
+
+		thread_shutdown();
+
+		TM_SHUTDOWN();
+
+		printf("\nThe elapsed time is %f seconds\n", TIMER_DIFF_SECONDS(start, stop));
+	}
+	printf("*************************");
+	printf("\n Thread concurrency test, random reads/writes, different random accesses");
+	printf("\n*************************\n");
+	for (counter = 0; counter < repetitions; counter++){
+		pseed=time(NULL);
+
+		TM_STARTUP(numThread);
+		
+		thread_startup(numThread);
+
+		TIMER_READ(start);
+		//run all threads
+		thread_start(run5, (void*)&data);
 		TIMER_READ(stop);
 
 		thread_shutdown();
