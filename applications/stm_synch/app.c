@@ -205,6 +205,7 @@ void run4 (void* argPtr) {
     TM_THREAD_EXIT();
 }
 
+//NOT USED - FOR TESTING ONLY - TOTALLY RANDOM FUNCTION
 void run5 (void* argPtr){
 
 	struct data data = *((struct data *) argPtr);
