@@ -19,8 +19,9 @@ The usage for the benchmark is
 - **number_of_operations** (num_ops_per_tran) is the number of operations per transactions.
 - **probability** (read_probability) used for checking the random number which will decide a TM_SHARED_READ or TM_SHARED_WRITE.
 
+The script `run_tests.sh` executes a set of tests spawning up to 32 threads and doing for each of them an increasing number of operations to a vector of a increasing size.
+
 To better visualize the result of the benchmark it is possible to copy and paste the output of the benchmark in a text file, save it and run `python3 results.py [file_name]`
 It would print the time plot and then the aborts plot.
-
 
 To disable Intel Hyperthreading you can use applications/stm_synch/stop_ht.sh (and start_ht.sh to restart it), modifying the logical processors number for your architecture (it is possible to see which are the HT logical cores with `grep -H . /sys/devices/system/cpu/cpu*/topology/thread_siblings_list`, that are the second number in each printed line; more information [here](https://www.golinuxhub.com/2018/01/how-to-disable-or-enable-hyper.html)) 
