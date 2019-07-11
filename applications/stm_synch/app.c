@@ -157,7 +157,7 @@ void run4 (void* argPtr) {
 				spend_some_time();
 			
 				item = i_op * block_size + (int)(random_number(&pseed)*block_size);
-				printf("item: %d\n",item);
+				//printf("item: %d\n",item);
 
 				if(random_number(&pseed) > read_probability)
 					TM_SHARED_WRITE(vals[item], my_variables[item]);
@@ -176,7 +176,7 @@ void run4 (void* argPtr) {
 				spend_some_time();
 			
 				item = i_op * block_size + (int)(random_number(&pseed)*block_size);
-				printf("item: %d\n",item);
+				//printf("item: %d\n",item);
 
 				if(random_number(&pseed) > read_probability)
 					TM_SHARED_WRITE(vals[item], my_variables[item]);
