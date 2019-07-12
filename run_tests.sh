@@ -8,7 +8,7 @@ while [  $THREADS -le 32 ]; do
 		do
 			let ITEMS=$OPS*4
 			echo ""
-			echo "----THREADS $THREADS ITEMS $ITEMS OPS $OPS----"
+			echo "---- THREADS $THREADS ITEMS $ITEMS OPS $OPS ----"
 			echo ""
 			./app $THREADS 2000 2000 10 $ITEMS 10 $OPS 0.5;
 		done
