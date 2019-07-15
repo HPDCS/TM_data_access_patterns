@@ -10,7 +10,7 @@ while [  $THREADS -le 32 ]; do
 			echo ""
 			echo "---- THREADS $THREADS ITEMS $ITEMS OPS $OPS ----"
 			echo ""
-			./app $THREADS 2000 2000 10 $ITEMS 10 $OPS 0.5;
+			./app $THREADS 500 500 4 $ITEMS 10 $OPS 0.5;
 		done
 	let THREADS=THREADS+2 
 done
