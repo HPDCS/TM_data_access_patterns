@@ -2,7 +2,7 @@
 
 cd applications/stm_synch
 THREADS=2
-OPS_ARRAY=(10 50 100 500 1000)
+OPS_ARRAY=(10 50 100 200)
 while [  $THREADS -le 32 ]; do
 	for OPS in ${OPS_ARRAY[@]};
 		do
