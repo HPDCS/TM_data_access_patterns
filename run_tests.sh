@@ -12,5 +12,5 @@ while [  $THREADS -le 32 ]; do
 			echo ""
 			./app $THREADS 500 500 4 $ITEMS 10 $OPS 0.5;
 		done
-	let THREADS=THREADS+2 
+	let THREADS=THREADS*2 
 done
