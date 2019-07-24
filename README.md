@@ -8,7 +8,7 @@ To execute the benchmark go in applications/stm_synch and run "app" executable
 
 The usage for the benchmark is
 
-`./app [number_of_threads] [dummy_time] [number_of_wait_cycles] [number_of_transaction_per_thread] [shared_memory_size] [number_of_test_repetitions]`
+`./app [number_of_threads] [dummy_time] [num_waits] [num_trans] [num_items] [test_repetitions] [num_ops_per_tran] [read_probability]`
 
 - **number_of_threads** is the number of thread the benchmark will spawn
 - **dummy_time** is the time spent doing nothing (transaction padding time)
