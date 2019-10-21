@@ -205,7 +205,7 @@ void run4 (void* argPtr) {
     TM_THREAD_EXIT();
 }
 
-//NOT USED - FOR TESTING ONLY - TOTALLY RANDOM FUNCTION
+//TOTALLY RANDOM FUNCTION
 void run5 (void* argPtr){
 
 	struct data data = *((struct data *) argPtr);
@@ -227,7 +227,7 @@ void run5 (void* argPtr){
 
 			spend_some_time();
 			
-			item = rand_lim((block_size*num_ops_per_tran)-1);
+			item = (int)(random_number(&pseed)*num_items);
 
 			if(random_number(&pseed) > read_probability)
 				TM_SHARED_WRITE(vals[item], my_variables[item]);
@@ -367,6 +367,7 @@ int main(int argc, char **argv)
 		thread_shutdown();
 
 		TM_SHUTDOWN();
+		stm_get_global_stats("global_reset", &v);
 
 		printf("\nThe elapsed time is %f seconds\n", TIMER_DIFF_SECONDS(start, stop));
 	}

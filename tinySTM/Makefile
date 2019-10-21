@@ -39,8 +39,8 @@ include Makefile.common
 # Refer to [PPoPP-08] for more details.
 ########################################################################
 
-# DEFINES += -DDESIGN=WRITE_BACK_ETL
- DEFINES += -DDESIGN=WRITE_BACK_CTL
+DEFINES += -DDESIGN=WRITE_BACK_ETL
+# DEFINES += -DDESIGN=WRITE_BACK_CTL
 # DEFINES += -DDESIGN=WRITE_THROUGH
 # DEFINES += -DDESIGN=MODULAR
 
