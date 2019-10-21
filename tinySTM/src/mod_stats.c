@@ -73,8 +73,10 @@ int stm_get_global_stats(const char *name, void *val)
     *(unsigned long *)val = mod_stats_global.retries_acc;
     return 1;
   }
-  if (strcmp("global_max_retries", name) == 0) {
-    *(unsigned long *)val = mod_stats_global.retries_max;
+  if (strcmp("global_reset", name) == 0) {
+    mod_stats_global.retries_max = 0;
+    mod_stats_global.commits = 0;
+    mod_stats_global.retries_acc = 0;
     return 1;
   }
 
