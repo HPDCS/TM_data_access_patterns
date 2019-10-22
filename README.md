@@ -19,9 +19,16 @@ The usage for the benchmark is
 - **number_of_operations** (num_ops_per_tran) is the number of operations per transactions.
 - **probability** (read_probability) used for checking the random number which will decide a TM_SHARED_READ or TM_SHARED_WRITE.
 
-The script `run_tests.sh` executes a set of tests spawning up to 32 threads and doing for each of them an increasing number of operations to a vector of a increasing size.
+The script `do_tests.sh` executes a set of tests spawning up to 8 threads and doing for each of them an increasing number of operations to a vector of a increasing size and a decreasing read probability. In particular:
+- **number_of_threads** assumes the following values: 1,2,3,4,5,6,7,8
+- **dummy_time** is set to be 45
+- **num_waits** is set to be 45
+- **num_trans** is set to be 4000
+- **num_items** assumes the following values: 10,30,50,70,90
+- **num_ops_per_trans** assumes the following values: 2,5,10
+- **read_probability** assumes the following values: 1,0.8,0.6,0.4,0.3,0.2,0
 
-To better visualize the result of the benchmark it is possible to copy and paste the output of the benchmark in a text file, save it and run `python3 results.py [file_name]`
+To better visualize the result of the benchmark it is possible to copy and paste the output of the benchmark in a csv file, save it and run `python3 results.py [file_name]`
 It would print the time plot and then the aborts plot.
 
 To convert the results in csv format, save the output as `test` and run `python3 etltocsv.py` or `python3 ctltocsv.py`.
