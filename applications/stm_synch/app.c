@@ -226,7 +226,7 @@ void run5 (void* argPtr){
 		for(i_op = 0; i_op < num_ops_per_tran; i_op++){
 
 			spend_some_time();
-			
+			int num_items = block_size * num_ops_per_tran;
 			item = (int)(random_number(&pseed)*num_items);
 
 			if(random_number(&pseed) > read_probability)

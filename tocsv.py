@@ -1,6 +1,11 @@
-file = open("test_ctl.csv", 'r', encoding = "utf-8")
+import sys
 
-out = open('CTL.csv','w')
+file_input = sys.argv[1]
+file_output = sys.argv[2]
+
+file = open(file_input, 'r', encoding = "utf-8")
+
+out = open(file_output,'w')
 
 run = ""
 commits = ""
