@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd applications/stm_synch
+#THREADS_ARRAY=(2 4 8 12 16 24 32)
 THREADS_ARRAY=(1 2 3 4 5 6 7 8)
 ITEMS_ARRAY=(10 30 50 70 90)
 OPS_ARRAY=(2 5 10)
