@@ -19,7 +19,7 @@ The usage for the benchmark is
 - **number_of_operations** (num_ops_per_tran) is the number of operations per transactions.
 - **probability** (read_probability) used for checking the random number which will decide a TM_SHARED_READ or TM_SHARED_WRITE.
 
-Given those, parameters, the test will execute three kinds of runs:
+Given those parameters, the test will execute three kinds of runs:
 - **sequential run**: all the threads execute transactions from the first to the last element of the array, in a sequential way.
 - **mixed run**: half of the threads exectutes transactions from the first to the last element of the array; the other half executes transactions the other way around.
 - **random run**: all the threads execute transactions accessing random array elements. 
@@ -39,7 +39,7 @@ To better visualize the result of the benchmark it is possible to execute the sc
 `./generate_files.sh [output_file_name].csv`
 
 
-It will first compile all the benchmark, then it will execute `do_tests.sh`, saving the results in a txt file, subsequently passed to a python script that turns it into a CSV table. 
+It will first compile all the benchmark, then it will execute `do_tests.sh`, saving the results in a txt file, subsequently the file is parsed from a python script that turns it into a CSV table. 
 You can show a graphical view of the data with:
 
 `python3 plot.py [output_file_name] [test_repetitions] [number_of_threads] [num_items] [num_ops_per_trans] [read_probability]`
