@@ -77,6 +77,7 @@ def variable_prob():
     plt.legend(loc='upper left',ncol=3, bbox_to_anchor=(-0.75, 1.12))
     plt.ylabel("Abort rate")
     plt.xlabel("Read probability")
+    plt.xlim((0,1))
     plt.show()
 
 def variable_threads():
@@ -115,6 +116,7 @@ def variable_threads():
     plt.plot(xline_ran,yline2_ran,c='red',label="random")
     plt.ylabel("Abort rate")
     plt.xlabel("Threads")
+    plt.xlim((2,32))
     plt.legend(loc='upper left',ncol=3, bbox_to_anchor=(-0.75, 1.12))
     plt.show()
 
@@ -154,6 +156,7 @@ def variable_items():
     plt.plot(xline_ran,yline2_ran,c='red',label="random")
     plt.ylabel("Abort rate")
     plt.xlabel("Items")
+    plt.xlim((20,90))
     plt.legend(loc='upper left',ncol=3, bbox_to_anchor=(-0.75, 1.12))
     plt.show()
 
@@ -192,6 +195,7 @@ def variable_ops():
     plt.plot(xline_ran,yline2_ran,c='red',label="random")
     plt.ylabel("Abort rate")
     plt.xlabel("Operations per trans.")
+    plt.xlim((2,10))
     plt.legend(loc='upper left',ncol=3, bbox_to_anchor=(-0.75, 1.12))
     plt.show()
 
