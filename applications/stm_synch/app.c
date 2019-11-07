@@ -9,6 +9,7 @@
 #include "timer.h"
 #include "tm.h"
 
+
 #define NORM		0x7fffffff
 
 pthread_spinlock_t lock;
@@ -71,7 +72,7 @@ struct data{
 };
 
 
-void run3 (void* argPtr) {
+void sequantial_path (void* argPtr) {
 
 	pthread_spin_lock(&lock);
 
@@ -126,7 +127,7 @@ void run3 (void* argPtr) {
     TM_THREAD_EXIT();
 }
 
-void run4 (void* argPtr) {
+void inverse_path (void* argPtr) {
 
 	pthread_spin_lock(&lock);
 
@@ -206,7 +207,7 @@ void run4 (void* argPtr) {
 }
 
 //TOTALLY RANDOM FUNCTION
-void run5 (void* argPtr){
+void random_path (void* argPtr){
 
 	struct data data = *((struct data *) argPtr);
 
@@ -318,7 +319,7 @@ int main(int argc, char **argv)
 
 		TIMER_READ(start);
 		//run all threads
-		thread_start(run3, (void*)&data);
+		thread_start(sequantial_path, (void*)&data);
 		TIMER_READ(stop);
 
 		thread_shutdown();
@@ -339,7 +340,7 @@ int main(int argc, char **argv)
 
 		TIMER_READ(start);
 		//run all threads
-		thread_start(run4, (void*)&data);
+		thread_start(inverse_path, (void*)&data);
 		TIMER_READ(stop);
 
 		thread_shutdown();
@@ -361,7 +362,7 @@ int main(int argc, char **argv)
 
 		TIMER_READ(start);
 		//run all threads
-		thread_start(run5, (void*)&data);
+		thread_start(random_path, (void*)&data);
 		TIMER_READ(stop);
 
 		thread_shutdown();
