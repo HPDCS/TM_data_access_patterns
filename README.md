@@ -50,7 +50,7 @@ Two graphics will appear: one showing the overall time on the y-axis, the other 
 
 `python3 plot.py ETL 10 X 20 5 0.8`
 
-It will show the graphic with the data printed on the file **ETL.csv**, whith **10 test repetitions**, **10 array items**, **5 operations per transaction** and **80% of read operation**; the dependent variable will be the **number of threads** and the independent variables will be the **time** and the **abort rate**. 
+It will show the graphic with the data printed on the file **ETL.csv**, whith **10 test repetitions**, **20 array items**, **5 operations per transaction** and **80% of read operation**; the dependent variable will be the **number of threads** and the independent variables will be the **time** and the **abort rate**. 
 The graphic will be composed by three lines, one for the data concerning the **sequential run**, one for the data concerning the **mixed run** and one for the data concerning the **random run**.
 
 To disable Intel Hyperthreading you can use applications/stm_synch/stop_ht.sh (and start_ht.sh to restart it), modifying the logical processors number for your architecture (it is possible to see which are the HT logical cores with `grep -H . /sys/devices/system/cpu/cpu*/topology/thread_siblings_list`, that are the second number in each printed line; more information [here](https://www.golinuxhub.com/2018/01/how-to-disable-or-enable-hyper.html)) 
