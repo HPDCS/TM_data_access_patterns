@@ -48,7 +48,7 @@ Two graphics will appear: one showing the overall time on the y-axis, the other 
 
 `./generate_files.sh ETL.csv`
 
-`python3 plot.py ETL 10 X 10 5 0.8`
+`python3 plot.py ETL 10 X 20 5 0.8`
 
 It will show the graphic with the data printed on the file **ETL.csv**, whith **10 test repetitions**, **10 array items**, **5 operations per transaction** and **80% of read operation**; the dependent variable will be the **number of threads** and the independent variables will be the **time** and the **abort rate**. 
 The graphic will be composed by three lines, one for the data concerning the **sequential run**, one for the data concerning the **mixed run** and one for the data concerning the **random run**.
