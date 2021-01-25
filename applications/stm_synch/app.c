@@ -94,8 +94,6 @@ void sequantial_path (void* argPtr) {
 		int i_op;
 
 		for(i_op = 0; i_op < num_ops_per_tran; i_op++){
-
-			spend_some_time();
 			
 			item = i_op * block_size + (int)(random_number(&pseed)*block_size);
 			//printf("item: %d\n",item);
@@ -111,11 +109,11 @@ void sequantial_path (void* argPtr) {
 		
 		TM_END(); //end transaction
 
-		int i;
-		sum = 0;
-		for (i = 0; i < block_size*num_ops_per_tran; i++){
-			sum += my_variables[i];
-		}
+		//int i;
+		//sum = 0;
+		//for (i = 0; i < block_size*num_ops_per_tran; i++){
+			//sum += my_variables[i];
+		//}
 
 		int c;
 		for (c = 0; c < data.num_waits; c++){
@@ -155,7 +153,6 @@ void inverse_path (void* argPtr) {
 
 			for(i_op = 0; i_op < num_ops_per_tran; i_op++){
 
-				spend_some_time();
 			
 				item = i_op * block_size + (int)(random_number(&pseed)*block_size);
 				//printf("item: %d\n",item);
@@ -174,7 +171,6 @@ void inverse_path (void* argPtr) {
 
 			for(i_op = num_ops_per_tran-1; i_op >= 0; i_op--){
 
-				spend_some_time();
 			
 				item = i_op * block_size + (int)(random_number(&pseed)*block_size);
 				//printf("item: %d\n",item);
@@ -192,11 +188,11 @@ void inverse_path (void* argPtr) {
 		
 		TM_END(); //end transaction
 
-		int i;
-		sum = 0;
-		for (i = 0; i < block_size*num_ops_per_tran; i++){
-			sum += my_variables[i];
-		}
+		//int i;
+		//sum = 0;
+		//for (i = 0; i < block_size*num_ops_per_tran; i++){
+		//	sum += my_variables[i];
+		//}
 		int c;
 		for (c = 0; c < data.num_waits; c++){
 			spend_some_time();
@@ -226,7 +222,7 @@ void random_path (void* argPtr){
 
 		for(i_op = 0; i_op < num_ops_per_tran; i_op++){
 
-			spend_some_time();
+
 			int num_items = block_size * num_ops_per_tran;
 			item = (int)(random_number(&pseed)*num_items);
 
@@ -241,11 +237,11 @@ void random_path (void* argPtr){
 		
 		TM_END(); //end transaction
 
-		int i;
-		sum = 0;
-		for (i = 0; i < block_size*num_ops_per_tran; i++){
-			sum += my_variables[i];
-		}
+		//int i;
+		//sum = 0;
+		//for (i = 0; i < block_size*num_ops_per_tran; i++){
+		// sum += my_variables[i];
+		//}
 
 		int c;
 		for (c = 0; c < data.num_waits; c++){
