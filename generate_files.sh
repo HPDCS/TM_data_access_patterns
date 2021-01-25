@@ -6,6 +6,8 @@ echo "COMPILING ALL"
 echo "_____________________________"
 echo "_____________________________"
 echo "Executing the the tests"
+rm output.csv
+rm results.txt
 ./do-tests.sh >> results.txt
 echo "_____________________________"
 echo "_____________________________"
