@@ -9,7 +9,6 @@
 #include "timer.h"
 #include "tm.h"
 
-
 #define NORM		0x7fffffff
 
 pthread_spinlock_t lock;
@@ -72,7 +71,7 @@ struct data{
 };
 
 
-void sequantial_path (void* argPtr) {
+void run3 (void* argPtr) {
 
 	pthread_spin_lock(&lock);
 
@@ -94,6 +93,8 @@ void sequantial_path (void* argPtr) {
 		int i_op;
 
 		for(i_op = 0; i_op < num_ops_per_tran; i_op++){
+
+			spend_some_time();
 			
 			item = i_op * block_size + (int)(random_number(&pseed)*block_size);
 			//printf("item: %d\n",item);
@@ -109,11 +110,11 @@ void sequantial_path (void* argPtr) {
 		
 		TM_END(); //end transaction
 
-		//int i;
-		//sum = 0;
-		//for (i = 0; i < block_size*num_ops_per_tran; i++){
-			//sum += my_variables[i];
-		//}
+		int i;
+		sum = 0;
+		for (i = 0; i < block_size*num_ops_per_tran; i++){
+			sum += my_variables[i];
+		}
 
 		int c;
 		for (c = 0; c < data.num_waits; c++){
@@ -125,7 +126,7 @@ void sequantial_path (void* argPtr) {
     TM_THREAD_EXIT();
 }
 
-void inverse_path (void* argPtr) {
+void run4 (void* argPtr) {
 
 	pthread_spin_lock(&lock);
 
@@ -153,6 +154,7 @@ void inverse_path (void* argPtr) {
 
 			for(i_op = 0; i_op < num_ops_per_tran; i_op++){
 
+				spend_some_time();
 			
 				item = i_op * block_size + (int)(random_number(&pseed)*block_size);
 				//printf("item: %d\n",item);
@@ -171,6 +173,7 @@ void inverse_path (void* argPtr) {
 
 			for(i_op = num_ops_per_tran-1; i_op >= 0; i_op--){
 
+				spend_some_time();
 			
 				item = i_op * block_size + (int)(random_number(&pseed)*block_size);
 				//printf("item: %d\n",item);
@@ -188,11 +191,11 @@ void inverse_path (void* argPtr) {
 		
 		TM_END(); //end transaction
 
-		//int i;
-		//sum = 0;
-		//for (i = 0; i < block_size*num_ops_per_tran; i++){
-		//	sum += my_variables[i];
-		//}
+		int i;
+		sum = 0;
+		for (i = 0; i < block_size*num_ops_per_tran; i++){
+			sum += my_variables[i];
+		}
 		int c;
 		for (c = 0; c < data.num_waits; c++){
 			spend_some_time();
@@ -203,7 +206,7 @@ void inverse_path (void* argPtr) {
 }
 
 //TOTALLY RANDOM FUNCTION
-void random_path (void* argPtr){
+void run5 (void* argPtr){
 
 	struct data data = *((struct data *) argPtr);
 
@@ -222,7 +225,7 @@ void random_path (void* argPtr){
 
 		for(i_op = 0; i_op < num_ops_per_tran; i_op++){
 
-
+			spend_some_time();
 			int num_items = block_size * num_ops_per_tran;
 			item = (int)(random_number(&pseed)*num_items);
 
@@ -237,11 +240,11 @@ void random_path (void* argPtr){
 		
 		TM_END(); //end transaction
 
-		//int i;
-		//sum = 0;
-		//for (i = 0; i < block_size*num_ops_per_tran; i++){
-		// sum += my_variables[i];
-		//}
+		int i;
+		sum = 0;
+		for (i = 0; i < block_size*num_ops_per_tran; i++){
+			sum += my_variables[i];
+		}
 
 		int c;
 		for (c = 0; c < data.num_waits; c++){
@@ -315,7 +318,7 @@ int main(int argc, char **argv)
 
 		TIMER_READ(start);
 		//run all threads
-		thread_start(sequantial_path, (void*)&data);
+		thread_start(run3, (void*)&data);
 		TIMER_READ(stop);
 
 		thread_shutdown();
@@ -336,7 +339,7 @@ int main(int argc, char **argv)
 
 		TIMER_READ(start);
 		//run all threads
-		thread_start(inverse_path, (void*)&data);
+		thread_start(run4, (void*)&data);
 		TIMER_READ(stop);
 
 		thread_shutdown();
@@ -358,7 +361,7 @@ int main(int argc, char **argv)
 
 		TIMER_READ(start);
 		//run all threads
-		thread_start(random_path, (void*)&data);
+		thread_start(run5, (void*)&data);
 		TIMER_READ(stop);
 
 		thread_shutdown();
